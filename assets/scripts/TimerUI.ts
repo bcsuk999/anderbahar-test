@@ -1,7 +1,7 @@
 // scripts/TimerUI.ts
 // Builds TimerFrame + TimerBg + count under this node.
-import { _decorator, Component, Node, Sprite, UITransform, SpriteFrame, Label, Color, Layers, executeInEditMode } from 'cc';
-const { ccclass, property } = _decorator;
+import { _decorator, Component, Node, Sprite, UITransform, SpriteFrame, Label, Color, Layers } from 'cc';
+const { ccclass, property, executeInEditMode } = _decorator;
 
 @ccclass('TimerUI')
 @executeInEditMode

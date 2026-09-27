@@ -1,7 +1,7 @@
 // scripts/ImageElement.ts
 // Single image node. Drag spriteFrame → shows in 2D view.
-import { _decorator, Component, Sprite, UITransform, SpriteFrame, Layers, executeInEditMode } from 'cc';
-const { ccclass, property } = _decorator;
+import { _decorator, Component, Sprite, UITransform, SpriteFrame, Layers } from 'cc';
+const { ccclass, property, executeInEditMode } = _decorator;
 
 @ccclass('ImageElement')
 @executeInEditMode

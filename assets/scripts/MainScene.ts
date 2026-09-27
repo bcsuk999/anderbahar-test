@@ -11,7 +11,7 @@ export class MainScene extends Component {
     // Use the Camera that already exists in the scene. Do NOT create Canvas/nodes in code —
     // UI must be created manually (right-click → 2D Objects → Sprite) so it shows in the editor.
     private setupCamera(): void {
-        let cam = this.getComponent(Camera) ?? this.getComponentInChildren(Camera, false);
+        let cam = this.getComponent(Camera) ?? this.getComponentInChildren(Camera);
         if (cam) {
             cam.projection = Camera.ProjectionType.ORTHO;
             cam.visibility = Layers.Enum.UI_2D | Layers.Enum.DEFAULT;

@@ -1,7 +1,7 @@
 // scripts/PlayersUI.ts
 // Builds a row of player avatars under this node.
-import { _decorator, Component, Node, Sprite, UITransform, SpriteFrame, Layers, executeInEditMode } from 'cc';
-const { ccclass, property } = _decorator;
+import { _decorator, Component, Node, Sprite, UITransform, SpriteFrame, Layers } from 'cc';
+const { ccclass, property, executeInEditMode } = _decorator;
 
 @ccclass('PlayersUI')
 @executeInEditMode
