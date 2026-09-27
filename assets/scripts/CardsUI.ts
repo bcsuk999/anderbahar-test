@@ -86,10 +86,10 @@ export class CardsUI extends Component {
     cardHeight: number = 145;
 
     @property
-    cardGap: number = 136.67;
+    initCardGap: number = 136.67;
 
     @property
-    cardY: number = -10;
+    initCardY: number = -10;
 
     @property
     vsWidth: number = 116;
@@ -241,7 +241,7 @@ export class CardsUI extends Component {
 
     private _layoutSig(): string {
         return [
-            this.cardWidth, this.cardHeight, this.cardGap, this.cardY,
+            this.cardWidth, this.cardHeight,
             this.vsWidth, this.vsHeight,
             this.rankWidth, this.rankHeight, this.rankX, this.rankY,
             this.cornerSuitWidth, this.cornerSuitHeight, this.cornerSuitX, this.cornerSuitY,
@@ -252,18 +252,24 @@ export class CardsUI extends Component {
 
     private _build(): void {
         this.node.layer = Layers.Enum.UI_2D;
-        this._ensureContainer(BAHAR, this.node, this.cardWidth, this.cardHeight, this.cardGap, this.cardY);
-        this._ensureContainer(ANDAR, this.node, this.cardWidth, this.cardHeight, -this.cardGap, this.cardY);
-        this._ensureImg('VS', this.node, this.vsWidth, this.vsHeight, 0, this.cardY, this.vsSprite);
+        this._ensurePlaced(BAHAR, this.node, this.cardWidth, this.cardHeight, this.initCardGap, this.initCardY);
+        this._ensurePlaced(ANDAR, this.node, this.cardWidth, this.cardHeight, -this.initCardGap, this.initCardY);
+        this._ensurePlaced('VS', this.node, this.vsWidth, this.vsHeight, 0, this.initCardY, this.vsSprite);
         for (const name of [ANDAR, BAHAR]) {
             this._buildCard(name);
         }
     }
 
-    private _ensureContainer(name: string, parent: Node, w: number, h: number, x: number, y: number): Node {
+    private _ensurePlaced(name: string, parent: Node, w: number, h: number, initX: number, initY: number, sf?: SpriteFrame): Node {
+        const isNew = !parent.getChildByName(name);
         const n = this._ensureNode(parent, name);
         this._ensureTransform(n).setContentSize(w, h);
-        n.setPosition(x, y, 0);
+        if (sf !== undefined) {
+            const s = n.getComponent(Sprite) ?? n.addComponent(Sprite);
+            s.sizeMode = Sprite.SizeMode.CUSTOM;
+            if (sf && s.spriteFrame !== sf) s.spriteFrame = sf;
+        }
+        if (isNew) n.setPosition(initX, initY, 0);
         return n;
     }
 
